@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olatunji Akinshola — Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo-deep:#1B1F3B;
+    --indigo-mid:#2E4374;
+    --indigo-line:#4A5D8F;
+    --paper:#F4EFE4;
+    --paper-ink:#21232C;
+    --gold:#C9A227;
+    --cream-text:#EDEAE2;
+    --cream-text-dim:#B9BED3;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--indigo-deep);
+    color:var(--cream-text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  .mono{
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:0.02em;
+  }
+
+  a{color:inherit;text-decoration:none;}
+
+  .wrap{
+    max-width:960px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- Adire pattern signature ---------- */
+  .adire-pattern{
+    position:absolute;
+    inset:0;
+    opacity:0.14;
+    pointer-events:none;
+  }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:rgba(27,31,59,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  nav .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:18px;
+    padding-bottom:18px;
+  }
+  .nav-mark{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:18px;
+    color:var(--cream-text);
+  }
+  .nav-mark span{color:var(--gold);}
+  .nav-links{display:flex;gap:28px;}
+  .nav-links a{
+    font-size:14px;
+    color:var(--cream-text-dim);
+    transition:color 0.2s;
+  }
+  .nav-links a:hover{color:var(--gold);}
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    position:relative;
+    padding:110px 0 100px;
+    overflow:hidden;
+  }
+  .hero-eyebrow{
+    font-size:13px;
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    margin-bottom:22px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .hero-eyebrow::before{
+    content:'';
+    width:28px;
+    height:1px;
+    background:var(--gold);
+    display:inline-block;
+  }
+  h1.hero-name{
+    font-size:clamp(40px,7vw,72px);
+    line-height:1.03;
+    color:var(--cream-text);
+    max-width:11ch;
+  }
+  .hero-role{
+    margin-top:22px;
+    font-size:clamp(17px,2vw,20px);
+    color:var(--cream-text-dim);
+    max-width:52ch;
+  }
+  .hero-cta{
+    margin-top:38px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-block;
+    padding:13px 26px;
+    font-size:14px;
+    font-weight:500;
+    border-radius:2px;
+    transition:transform 0.15s ease, background 0.15s ease;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:var(--indigo-deep);
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{
+    border:1px solid var(--indigo-line);
+    color:var(--cream-text);
+  }
+  .btn-ghost:hover{
+    border-color:var(--gold);
+    color:var(--gold);
+  }
+
+  /* ---------- Facts strip ---------- */
+  .facts{
+    border-top:1px solid rgba(255,255,255,0.1);
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    background:rgba(255,255,255,0.02);
+  }
+  .facts .wrap{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    padding:30px 32px;
+  }
+  .fact-label{
+    font-size:11px;
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin-bottom:6px;
+  }
+  .fact-value{
+    font-size:14px;
+    color:var(--cream-text);
+  }
+
+  /* ---------- About ---------- */
+  section.about{
+    padding:90px 0;
+  }
+  .section-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  .section-tag::before{content:'// ';}
+  section.about h2{
+    font-size:clamp(28px,4vw,36px);
+    color:var(--cream-text);
+    max-width:16ch;
+    margin-bottom:26px;
+  }
+  .about-body{
+    font-size:16px;
+    color:var(--cream-text-dim);
+    max-width:62ch;
+  }
+  .about-body p{margin-bottom:16px;}
+
+  /* ---------- Projects ---------- */
+  section.projects{
+    padding:20px 0 100px;
+  }
+  section.projects .section-tag, section.projects h2{padding-left:0;}
+  section.projects h2{
+    font-size:clamp(28px,4vw,36px);
+    color:var(--cream-text);
+    margin-bottom:50px;
+  }
+
+  .project{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:44px;
+    align-items:center;
+    margin-bottom:88px;
+  }
+  .project:nth-child(even){
+    direction:rtl;
+  }
+  .project:nth-child(even) > *{
+    direction:ltr;
+  }
+
+  .browser-mock{
+    background:var(--paper);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
+  }
+  .browser-bar{
+    background:#E3DCCB;
+    padding:10px 14px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .browser-dot{
+    width:9px;height:9px;border-radius:50%;
+    background:#C9BFA6;
+  }
+  .browser-url{
+    margin-left:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:#7A7361;
+    background:#F4EFE4;
+    padding:3px 10px;
+    border-radius:20px;
+    flex:1;
+    max-width:220px;
+  }
+  .browser-body{
+    height:220px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .mock-fashion{
+    background:linear-gradient(135deg,#EDE3D3 0%,#E3D2B8 100%);
+  }
+  .mock-fashion .mock-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    padding:24px;
+    width:100%;
+  }
+  .mock-card{
+    background:var(--indigo-mid);
+    aspect-ratio:3/4;
+    border-radius:3px;
+    position:relative;
+  }
+  .mock-card::after{
+    content:'';
+    position:absolute;
+    bottom:8px;left:8px;right:8px;
+    height:4px;
+    background:var(--gold);
+    opacity:0.7;
+  }
+  .mock-web3{
+    background:linear-gradient(135deg,#1B1F3B 0%,#2E4374 100%);
+  }
+  .mock-wallet-card{
+    background:rgba(244,239,228,0.06);
+    border:1px solid rgba(201,162,39,0.4);
+    border-radius:10px;
+    padding:22px 30px;
+    text-align:center;
+    backdrop-filter:blur(4px);
+  }
+  .mock-wallet-card .mono{
+    font-size:11px;
+    color:var(--gold);
+    display:block;
+    margin-bottom:10px;
+  }
+  .mock-connect-btn{
+    background:var(--gold);
+    color:var(--indigo-deep);
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    padding:8px 20px;
+    border-radius:20px;
+    display:inline-block;
+  }
+
+  .project-info h3{
+    font-size:24px;
+    color:var(--cream-text);
+    margin-bottom:12px;
+  }
+  .project-info p{
+    color:var(--cream-text-dim);
+    font-size:15px;
+    margin-bottom:18px;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--gold);
+    border:1px solid rgba(201,162,39,0.35);
+    padding:4px 10px;
+    border-radius:20px;
+  }
+  .project-links{display:flex;gap:20px;}
+  .project-links a{
+    font-size:13px;
+    font-weight:500;
+    color:var(--cream-text);
+    border-bottom:1px solid var(--gold);
+    padding-bottom:2px;
+    transition:color 0.2s;
+  }
+  .project-links a:hover{color:var(--gold);}
+
+  /* ---------- Skills ---------- */
+  section.skills{
+    padding:0 0 100px;
+  }
+  .skill-groups{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+  }
+  .skill-group h4{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--gold);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    margin-bottom:14px;
+  }
+  .skill-list{list-style:none;}
+  .skill-list li{
+    font-size:14.5px;
+    color:var(--cream-text-dim);
+    padding:7px 0;
+    border-bottom:1px solid rgba(255,255,255,0.07);
+  }
+
+  /* ---------- Contact / footer ---------- */
+  footer{
+    position:relative;
+    background:var(--indigo-mid);
+    padding:90px 0 50px;
+    overflow:hidden;
+  }
+  footer h2{
+    font-size:clamp(30px,5vw,46px);
+    color:var(--cream-text);
+    max-width:14ch;
+    margin-bottom:20px;
+  }
+  footer .about-body{color:var(--cream-text-dim);margin-bottom:36px;}
+  .contact-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-bottom:60px;
+  }
+  .contact-pill{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:12px 20px;
+    border-radius:30px;
+    font-size:14px;
+    transition:border-color 0.2s;
+  }
+  .contact-pill:hover{border-color:var(--gold);}
+  .contact-pill .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--gold);
+  }
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.1);
+    padding-top:24px;
+    display:flex;
+    justify-content:space-between;
+    font-size:12.5px;
+    color:var(--cream-text-dim);
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media (max-width:760px){
+    .facts .wrap{grid-template-columns:repeat(2,1fr);}
+    .project, .project:nth-child(even){
+      grid-template-columns:1fr;
+      direction:ltr;
+    }
+    .skill-groups{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark">OLATUNJI<span>.</span>DEV</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="adire-pattern" viewBox="0 0 960 500" preserveAspectRatio="xMaxYMin slice" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#C9A227" stroke-width="1.2">
+      <circle cx="820" cy="90" r="30"/>
+      <circle cx="820" cy="90" r="46"/>
+      <circle cx="900" cy="180" r="22"/>
+      <circle cx="900" cy="180" r="36"/>
+      <circle cx="740" cy="210" r="16"/>
+      <path d="M700 20 L940 260"/>
+      <path d="M760 10 L960 210"/>
+      <path d="M660 60 L860 260"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="hero-eyebrow">Frontend Developer &amp; CS Student</div>
+    <h1 class="hero-name">Olatunji Akinshola</h1>
+    <p class="hero-role">I build clean, responsive interfaces and check every detail until it's right. Based in Lagos, currently open to remote frontend, data annotation, and detail-driven digital work.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-primary">View my work</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<div class="facts">
+  <div class="wrap">
+    <div>
+      <div class="fact-label">Location</div>
+      <div class="fact-value">Lagos, Nigeria</div>
+    </div>
+    <div>
+      <div class="fact-label">Studying</div>
+      <div class="fact-value">BSc Computer Science</div>
+    </div>
+    <div>
+      <div class="fact-label">Languages</div>
+      <div class="fact-value">English &amp; Yoruba</div>
+    </div>
+    <div>
+      <div class="fact-label">Availability</div>
+      <div class="fact-value">Remote, part-time</div>
+    </div>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="section-tag">about</div>
+    <h2>A little about how I work</h2>
+    <div class="about-body">
+      <p>I'm a Computer Science student who taught myself frontend development through a hands-on programme at New Horizon Computer Institute — HTML, CSS, and JavaScript, then applying it to real, deployed projects.</p>
+      <p>I care about getting the small things right: spacing that lines up, a cart that actually updates, a layout that holds together on a small screen. That same habit carries into any detail-heavy work I take on, on-screen or off.</p>
+      <p>I have my own laptop, stable internet, and time around my studies to take on flexible remote work.</p>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="work">
+  <div class="wrap">
+    <div class="section-tag">work</div>
+    <h2>Things I've built</h2>
+
+    <div class="project">
+      <div class="browser-mock">
+        <div class="browser-bar">
+          <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+          <div class="browser-url mono">luxe-fashion-store</div>
+        </div>
+        <div class="browser-body mock-fashion">
+          <div class="mock-grid">
+            <div class="mock-card"></div>
+            <div class="mock-card"></div>
+            <div class="mock-card"></div>
+          </div>
+        </div>
+      </div>
+      <div class="project-info">
+        <h3>Luxe Fashion Store</h3>
+        <p>A responsive e-commerce website for a fashion store, featuring product listings, styling, and a shopping cart layout.</p>
+        <div class="tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">E-commerce</span>
+          <span class="tag">Responsive</span>
+        </div>
+        <div class="project-links">
+          <a href="https://olatunjiakinshola.github.io/luxe-fashion-store/" target="_blank" rel="noopener">Live demo →</a>
+          <a href="https://github.com/olatunjiakinshola/luxe-fashion-store" target="_blank" rel="noopener">View code →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="browser-mock">
+        <div class="browser-bar">
+          <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+          <div class="browser-url mono">web3-wallet-demo</div>
+        </div>
+        <div class="browser-body mock-web3">
+          <div class="mock-wallet-card">
+            <span class="mono">WALLET</span>
+            <div class="mock-connect-btn">Connect Wallet</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-info">
+        <h3>Web3 Wallet Connect Demo</h3>
+        <p>A Web3 UI wallet-connect demo and performance-optimized landing page, enhancing user experience through clean design principles.</p>
+        <div class="tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">UI/UX</span>
+          <span class="tag">Performance</span>
+        </div>
+        <div class="project-links">
+          <a href="https://olatunjiakinshola.github.io/web3-wallet-demo/" target="_blank" rel="noopener">Live demo →</a>
+          <a href="https://github.com/olatunjiakinshola/web3-wallet-demo" target="_blank" rel="noopener">View code →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="skills" id="skills">
+  <div class="wrap">
+    <div class="section-tag">skills</div>
+    <h2 style="font-size:clamp(28px,4vw,36px);color:var(--cream-text);margin-bottom:40px;">What I bring</h2>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h4>Development</h4>
+        <ul class="skill-list">
+          <li>HTML &amp; CSS</li>
+          <li>JavaScript</li>
+          <li>Responsive design</li>
+          <li>Git &amp; GitHub</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Working style</h4>
+        <ul class="skill-list">
+          <li>High attention to detail</li>
+          <li>Follows written instructions closely</li>
+          <li>Fast, accurate typing</li>
+          <li>Reliable &amp; consistent</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Language</h4>
+        <ul class="skill-list">
+          <li>English — fluent</li>
+          <li>Yoruba — fluent</li>
+          <li>Clear written communication</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <svg class="adire-pattern" viewBox="0 0 960 400" preserveAspectRatio="xMinYMax slice" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#EDEAE2" stroke-width="1.2">
+      <circle cx="90" cy="330" r="30"/>
+      <circle cx="90" cy="330" r="46"/>
+      <circle cx="20" cy="250" r="20"/>
+      <path d="M10 380 L230 160"/>
+      <path d="M60 390 L280 170"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="section-tag">contact</div>
+    <h2>Let's work together</h2>
+    <p class="about-body">Open to remote frontend development, data annotation, content review, and other detail-driven digital work alongside my studies.</p>
+    <div class="contact-grid">
+      <a href="mailto:Olatunjiakinsholaa@gmail.com" class="contact-pill"><span class="dot"></span>Olatunjiakinsholaa@gmail.com</a>
+      <a href="tel:+2348060230990" class="contact-pill"><span class="dot"></span>0806 023 0990</a>
+      <a href="https://github.com/olatunjiakinshola" target="_blank" rel="noopener" class="contact-pill"><span class="dot"></span>GitHub</a>
+      <a href="#" class="contact-pill"><span class="dot"></span>LinkedIn</a>
+    </div>
+    <div class="footer-bottom">
+      <span>Olatunji Akinshola — Lagos, Nigeria</span>
+      <span class="mono">Built with HTML, CSS &amp; JavaScript</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
